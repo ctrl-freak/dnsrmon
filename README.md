@@ -1,2 +1,0 @@
-# dnsrmon
-DNS Record Monitor
