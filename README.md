@@ -19,5 +19,5 @@ Monitors changes in DNS records on DNS servers and sends an email when anything 
 `crontab -e`<br />
 `*/5 *  * * * wget -qO- http://localhost/dnsrmon/?cron --delete-after &> /dev/null`
 6. Add a server in the `dnsservers` table:<br />
-`INSERT INTO `dnsservers` (`address`, `label`, `enabled`) VALUES ('8.8.8.8', 'Google', 1);`
+`INSERT INTO 'dnsservers' ('address', 'label', 'enabled') VALUES ('8.8.8.8', 'Google', 1);`
 7. Add DNS records to `domains` table
