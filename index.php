@@ -49,8 +49,6 @@ foreach ($DNSServers as &$DNSServer) {
     $DNSServer['dnsquery'] = new DNSQuery($DNSServer['address']);
 }
 
-var_export($DNSServers); exit;
-
 $DomainRecords = $PDO->Query('SELECT * FROM domains WHERE next_run < NOW() AND enabled = TRUE')->fetchAll();
 
 $ChangeSQL = 'INSERT INTO changes SET event_datetime=NOW(), domain_id=:domain_id, dnsserver_id=:dnsserver_id, new_data=:new_data';
@@ -154,7 +152,7 @@ function send($config, $from, $tos, $subject, $body) {
 function changeHTML($DomainRecord, $DNSServer, $FromData, $ToData) { 
     ob_start();
 ?>
-        <table class="dns-record-table">
+        <table class="dns-record-table" cellspacing="0">
             <tr>
                 <th>Domain:</th>
                 <td><?=$DomainRecord['domain']?></td>
@@ -173,11 +171,11 @@ function changeHTML($DomainRecord, $DNSServer, $FromData, $ToData) {
             </tr>
             <tr>
                 <th>Old Data:</th>
-                <td><?=$FromData?></td>
+                <td><pre><?=json_encode(json_decode($FromData),JSON_PRETTY_PRINT)?></pre></td>
             </tr>
             <tr>
                 <th>New Data:</th>
-                <td><?=$ToData?></td>
+                <td><pre><?=json_encode(json_decode($ToData),JSON_PRETTY_PRINT)?></pre></td>
             </tr>
         </table>
 
@@ -194,12 +192,27 @@ function emailHTML($Body) {
 <html>
     <head>
         <style type="text/css">
-            .dns-record-table th {
-                text-align: right;
+            
+            .dns-record-table {
+                font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
             }
             
-            table {
-                font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
+            .dns-record-table th {
+                text-align: right;
+                vertical-align: top;
+            }
+            
+            .dns-record-table td, 
+            .dns-record-table th {
+                border-top: 1px solid #DDDDDD;
+            }
+            
+            .dns-record-table td {
+                padding-left: 1em;
+            }
+            
+            .dns-record-table pre {
+                margin: 0;
             }
         </style>
     </head>
