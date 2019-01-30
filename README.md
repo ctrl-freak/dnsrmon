@@ -3,6 +3,12 @@ DNS Record Monitor
 
 Monitors changes in DNS records on DNS servers and sends an email when anything is different.
 
+# Requirements
+
+* PHP
+* MySQL
+* Port 53 open outbound
+
 # Installation
 
 1. `cd /var/www`
