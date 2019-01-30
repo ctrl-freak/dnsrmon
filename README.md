@@ -12,7 +12,7 @@ Monitors changes in DNS records on DNS servers and sends an email when anything 
 # Installation
 
 1. `cd /var/www`
-1. `git clone git@github.com:ctrl-freak/dnsrmon.git`
+1. `git clone https://github.com/ctrl-freak/dnsrmon.git`
 2. Import `dnsrmon.sql` to create database and tables
 3. Create MySQL user with full access to database
 2. `cd dnsrmon`
